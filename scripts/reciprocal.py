@@ -34,8 +34,9 @@ for SIG,label in [(0.5,"WARPED"),(0.0,"FLAT")]:
 
 # convention closure: uniform-w responsivity ratio, mine vs theirs, vs (t2_theirs/t2_mine)^-2
 print("\n-- convention item closure --")
-w0=0.01
-H0,_=build(0.5); Hw,_=build(0.5,warr=np.full(ns-2,w0))
-mine=(np.log(ldos(Hw))-np.log(ldos(H0)))/w0   # ~ d ln rho/dw at w0 (one-sided, matches earlier defn)
+w0=0.01; dw=1e-3
+Hp,_=build(0.5,warr=np.full(ns-2,w0+dw)); Hm,_=build(0.5,warr=np.full(ns-2,w0-dw))
+mine=(np.log(ldos(Hp))-np.log(ldos(Hm)))/(2*dw)   # centred d ln rho/dw at w0 (a one-sided secant from w=0 halves a quadratic response's slope)
 print(f"my uniform-w response at w=0.01 (warped): {mine:+.3f}   their measured: -1.80")
-print(f"predicted ratio from law's 1/t2^2 with t2_mine=sqrt2, t2_theirs=1:  {np.sqrt(2)**2:.1f}x  -> {mine*2:+.3f} vs -1.80")
+verdict = 'PASS' if abs(mine*2+1.80)<0.05 else 'FAIL'
+print(f"predicted ratio from law's 1/t2^2 with t2_mine=sqrt2, t2_theirs=1:  {np.sqrt(2)**2:.1f}x  -> {mine*2:+.3f} vs -1.80   {verdict}")

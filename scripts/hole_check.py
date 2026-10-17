@@ -10,16 +10,19 @@
 import numpy as np
 from ssh_common import bonds, hamiltonian, ldos
 
-print("CHECK 1: d ln rho/d sigma vs r -- eta and N robustness")
-print(f"{'r':>6} {'N=250,e=1e-3':>13} {'N=250,e=1e-5':>13} {'N=500,e=1e-5':>13}")
+print("CHECK 1: d ln rho/d sigma vs r -- eta and N robustness, with absolute signal")
+print(f"{'r':>6} {'N=250,e=1e-3':>13} {'N=250,e=1e-5':>13} {'N=500,e=1e-5':>13} {'N=250,e=1e-7':>13} {'LDOS/LDOS(r=.5)':>16}")
 ds = 1e-4
+L50 = ldos(hamiltonian(bonds(250, 0.5, 0.5)), eta=1e-7)
 for r in [0.5, 0.8, 0.9, 0.95, 0.97]:
     row = []
-    for Nc, eta in [(250, 1e-3), (250, 1e-5), (500, 1e-5)]:
+    for Nc, eta in [(250, 1e-3), (250, 1e-5), (500, 1e-5), (250, 1e-7)]:
         m = (np.log(ldos(hamiltonian(bonds(Nc, 0.5 + ds, r)), eta=eta))
              - np.log(ldos(hamiltonian(bonds(Nc, 0.5 - ds, r)), eta=eta))) / (2 * ds)
         row.append(m)
-    print(f"{r:6.2f} {row[0]:+13.4f} {row[1]:+13.4f} {row[2]:+13.4f}")
+    sig = ldos(hamiltonian(bonds(250, 0.5, r)), eta=1e-7) / L50
+    print(f"{r:6.2f} {row[0]:+13.4f} {row[1]:+13.4f} {row[2]:+13.4f} {row[3]:+13.4f} {sig:16.3f}")
+print("  (paper 1 section 4.4: +0.20 -> +2.26, absolute signal falls 3.6-fold)")
 
 print("\nCHECK 2: channel disentangling (angular, convention-invariant)")
 Nc, eta, w0 = 100, 1e-3, 0.02

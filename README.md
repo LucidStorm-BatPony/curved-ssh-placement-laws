@@ -5,9 +5,10 @@ Two draft papers, their derivations, and the scripts that verify them.
 ## Standing on whose shoulders
 
 This work builds directly on the **curved-spacetime Su-Schrieffer-Heeger model** of
-**Ahana Rajbongshi and Ranjan Modak**,
-*Topological properties of curved spacetime Su-Schrieffer-Heeger model*,
-[arXiv:2504.16200](https://arxiv.org/abs/2504.16200) (2025).
+**Priyanuj Rajbongshi and Ranjan Modak**,
+*Topological properties of curved spacetime extended Su-Schrieffer-Heeger model*,
+J. Phys.: Condens. Matter, [DOI 10.1088/1361-648X/ae8635](https://doi.org/10.1088/1361-648X/ae8635) (2026);
+[arXiv:2504.16200](https://arxiv.org/abs/2504.16200).
 Their Hamiltonian, their proof that the topological phase survives warping, and their
 exact zero-mode wavefunctions are the foundation of everything here. The placement
 laws below are properties of their model that they did not have reason to look for.
@@ -64,8 +65,8 @@ notes/         working notes: SUSY/memory bridge, memory protocol, archival skel
 ## Scripts
 
 All numbers quoted in the papers trace to a script here. `ssh_common.py` holds the
-lattice builders (t₁t₂ = 1 convention); the `verify_return.py` / `kernel_law.py` /
-`law_check.py` / `derive_verify.py` set is the counterpart session's independent
+lattice builders (t₁t₂ = 1 convention); the `verify_return.py` / `law_check.py` /
+`derive_verify.py` set is the counterpart session's independent
 implementation (t₂ = 1 convention). Requires only numpy.
 
 ```
@@ -82,7 +83,8 @@ cd scripts && for s in *.py; do [ "$s" != ssh_common.py ] && python3 "$s"; done
 | bubble.py | warp-wall profile: pinning, blindness curve, evenness, preamplification, SNR |
 | derive_check.py | single-spike leak structure of the shift-law derivation |
 | reciprocal.py | counterpart's law verified across conventions; gauge-factor closure |
-| verify_return.py, kernel_law.py, law_check.py, derive_verify.py | counterpart session's set |
+| verify_return.py, law_check.py, derive_verify.py | counterpart session's set |
+| exploratory/kernel_law.py | counterpart diagnostics, no pass/fail criteria; provenance only |
 
 ## Contact
 

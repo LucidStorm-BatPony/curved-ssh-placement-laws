@@ -54,7 +54,7 @@ A 1+1 Alcubierre-style top-hat shift profile with smooth walls — flat inside, 
 
 ## 6. Array design rule: curvature-bias diversity
 
-A single edge observable entangles the curvature and shift channels — the cross-responsivity d ln ρ/dσ itself runs with w. Computed response vectors at multiple element biases settle the disentangling scheme, and the convention-invariant statement is angular: a flat element paired with a warped element yields normalized response vectors separated by tens of degrees (38° in one implementation, comparable in the other), inverting the (σ, w²) system stably; two elements differing only in shift bias are collinear to a fraction of a degree and separate nothing — obvious in hindsight from the law, since both share the same 1/t₂² soft-region weighting. Both independent implementations reach the same qualitative verdict; raw condition numbers are deliberately not quoted, having been found normalization-dependent between conventions (a hazard the canonical variable w̃ removes if adopted end-to-end). **The array separates curvature from shift if and only if neighboring elements differ in curvature bias.** Fabrication cost: one lithographic profile choice per element, no new hardware.
+A single edge observable entangles the curvature and shift channels — the cross-responsivity d ln ρ/dσ itself runs with w. Computed response vectors at multiple element biases settle the disentangling scheme, and the convention-invariant statement is angular: a flat element paired with a warped element yields normalized response vectors separated by tens of degrees (38° and 21° in the two implementations, the difference reflecting the different effective shift bias of the warped element in the two hopping conventions), inverting the (σ, w²) system stably; two elements differing only in shift bias are collinear to a fraction of a degree and separate nothing — obvious in hindsight from the law, since both share the same 1/t₂² soft-region weighting. Both independent implementations reach the same qualitative verdict; raw condition numbers are deliberately not quoted, having been found normalization-dependent between conventions (a hazard the canonical variable w̃ removes if adopted end-to-end). **The array separates curvature from shift if and only if neighboring elements differ in curvature bias.** Fabrication cost: one lithographic profile choice per element, no new hardware.
 
 ## 7. Validation path
 
@@ -70,7 +70,7 @@ The shift can be written into a topological chain without paying for it in prote
 
 ## Appendix A: Methods
 
-Odd chains, 201 sites (100 cells), exact diagonalization and direct solve; power-law profile of the companion paper throughout; broadening η = 10⁻³ as the engineered-linewidth proxy except in the η-scaling study (3 × 10⁻³ to 10⁻⁴). Conventions: session one, t₁t₂ = 1; session two, t₂ = 1; all convention-covariant claims verified in both. Scripts (persisted with this draft): tilt_cost.py, tilt_cost2.py, bubble.py, reciprocal.py, derive_check.py (session one); verify_return.py, kernel_law.py, law_check.py, derive_verify.py (session two).
+Odd chains, 201 sites (100 cells), exact diagonalization and direct solve; power-law profile of the companion paper throughout; broadening η = 10⁻³ as the engineered-linewidth proxy except in the η-scaling study (3 × 10⁻³ to 10⁻⁴). Conventions: session one, t₁t₂ = 1; session two, t₂ = 1; all convention-covariant claims verified in both. Raw-w responsivities agree between the conventions by the 1/t₂² gauge factor only in the small-shift window w ≲ 0.02 (ratio 2.0–2.1); at larger w the two conventions diverge nonperturbatively (10× by w = 0.08, with the curvature cross-talk changing sign), because a fixed absolute w is a different physical shift in the two conventions. This is the practical case for the canonical variable w̃: in local-hopping units the law is convention-free. Scripts (persisted with this draft): tilt_cost.py, tilt_cost2.py, bubble.py, reciprocal.py, derive_check.py (session one); verify_return.py, kernel_law.py, law_check.py, derive_verify.py (session two).
 
 ## Appendix B: Two-session verification protocol
 
@@ -79,6 +79,6 @@ Every result in this paper passed through two AI sessions with no shared code: c
 ## References
 
 [1] Companion draft: *A Topological Tidal-Curvature Imager* (B. Watson, 2026, unpublished; carries the full citation list for the SSH model, the curved-spacetime construction, qubit-probe prior art, superconducting platform parameters, and bolometry).
-[2] A. Rajbongshi and R. Modak, arXiv:2504.16200 (2025).
+[2] P. Rajbongshi and R. Modak, *Topological properties of curved spacetime extended Su-Schrieffer-Heeger model*, J. Phys.: Condens. Matter, DOI 10.1088/1361-648X/ae8635 (2026); arXiv:2504.16200.
 [3] Warp-metric physicality auditing: arXiv:2404.03095; Class. Quantum Grav. 41, 095009 (2024). *[verify before submission]*
 [4] Warp collapse waveforms: Clough, Dietrich, Khan, arXiv:2406.02466; Open J. Astrophys. 7 (2024). *[verify before submission]*

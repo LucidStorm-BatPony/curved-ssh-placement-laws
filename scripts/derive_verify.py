@@ -58,7 +58,7 @@ for label, mk in [("single b=8", lambda w: (np.zeros(NS - 2), w)),
         print(f"     w={w:5.0e}   d ln rho={dlnr:+.6e}   ln(1-P_B)={pred:+.6e}   rel dev={rel:.1e}")
 
 print("=" * 72)
-print("3. B-B BONDS ARE QUARTIC  (odd bond b=9; fit log|R| vs log w)")
+print("3. B-B BONDS: zero-mode PT gives NO O(w^2) term; measured slope 2 is eta^2 broadening background  (odd bond b=9; fit log|R| vs log w)")
 Rs, ws = [], [0.025, 0.05, 0.1, 0.2]
 for w in ws:
     warr = np.zeros(NS - 2); warr[9] = w
@@ -66,7 +66,7 @@ for w in ws:
 slope = np.polyfit(np.log(ws), np.log(np.abs(Rs)), 1)[0]
 for w, R in zip(ws, Rs):
     print(f"   w={w:5.3f}   R={R:+.3e}")
-print(f"   log-log slope = {slope:.3f}   (derivation predicts 4)")
+print(f"   log-log slope = {slope:.3f}   (zero-mode: none at O(w^2); slope 2 = background, see warp-shift-computation.md corrected corollary)")
 
 print("=" * 72)
 print("4. A-SHAPE INVARIANCE:  1 - cos_sim(A-part, unperturbed)  ~ O(w^4)")

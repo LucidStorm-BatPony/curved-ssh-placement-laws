@@ -1,4 +1,11 @@
 """Independent reproduction of warp-shift-computation.md claims.
+
+NOTE (17 Oct 2026, labels only, physics untouched): the "claims" quoted in the
+section headers below are session-one numbers in the t1*t2=1 convention.  This
+script uses t2=1.  The two agree by the 1/t2^2 gauge factor (x2) only for w <~ 0.02;
+above that the raw-w numbers diverge nonperturbatively (see paper 2, Appendix A).
+The bubble-wall numbers depend on wall geometry; the quoted 70x was later
+corrected to 85x (session one) / 72x (this convention), see warp-shift-computation.md.
 Odd chain, 201 sites (100 cells + 1), power-law curved-SSH profile,
 r = t1/t2 = 0.5, sigma = 0.5, eta = 1e-3 broadening, exact diagonalization
 and direct linear solve for edge LDOS. Written from scratch; no access to
@@ -98,14 +105,14 @@ for w in [None, 0.02, 0.05, 0.1]:
     print(f"  w={wl:4.2f}  pol={polA:+.3f}  footprint(cells,PR)={prc:5.2f}  |psi(1)|^2={p[0]:.3f}")
 
 print("=" * 72)
-print("E. SHIFT RESPONSIVITY d ln rho / dw  (claims: -0.9,-1.9,-6.6,-22 at w=.01,.02,.05,.08)")
+print("E. SHIFT RESPONSIVITY d ln rho / dw  (session-one, t1t2=1: -0.9,-1.9,-6.6,-22; x2 gauge factor applies only for w<~0.02)")
 dw = 1e-4
 for w in [0.01, 0.02, 0.05, 0.08]:
     d = (lnrho(0.5, w + dw) - lnrho(0.5, w - dw)) / (2 * dw)
     print(f"  w={w:4.2f}   d ln rho/dw = {d:+.3f}")
 
 print("=" * 72)
-print("F. CROSS-TALK d ln rho / dsigma at sigma=0.5 (claims: +0.20, +0.03, -7.3 at w=0,.02,.08)")
+print("F. CROSS-TALK d ln rho / dsigma at sigma=0.5 (session-one, t1t2=1: +0.20, +0.03, -7.3; conventions diverge above w~0.02)")
 ds = 1e-4
 for w in [None, 0.02, 0.08]:
     d = (lnrho(0.5 + ds, w) - lnrho(0.5 - ds, w)) / (2 * ds)
@@ -144,7 +151,7 @@ for c in [5, 10, 15, 20, 30, 50]:
 Rf = lnrho(0.0, bubble(0.02, 5)) - base_f
 Rw = lnrho(0.5, bubble(0.02, 5)) - base_w
 print(f"  G4 preamplification: flat R={Rf:+.3e}  warped R={Rw:+.3e}  ratio={Rw/Rf:6.1f}x")
-print("     (claims: flat -2e-4, warped -1.44e-2, ~70x; geometry-dependent)")
+print("     (session-one: flat -1.7e-4, warped -1.44e-2, 85x; this convention 72x; geometry-dependent)")
 
 x = np.arange(NS - 2) + 1.0
 w0 = 0.02; c = 20; h = 5; s = 3.0
