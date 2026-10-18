@@ -69,7 +69,9 @@ for w, R in zip(ws, Rs):
 print(f"   log-log slope = {slope:.3f}   (zero-mode: none at O(w^2); slope 2 = background, see warp-shift-computation.md corrected corollary)")
 
 print("=" * 72)
-print("4. A-SHAPE INVARIANCE:  1 - cos_sim(A-part, unperturbed)  ~ O(w^4)")
+print("4. A-SHAPE: 1 - cos_sim(A-part, unperturbed) ~ O(w^4)  [NOTE 17 Oct 2026: this test CANNOT detect")
+print("   the O(w^2) envelope tilt from B-B bonds, because 1-cos_sim is quadratic in the shape change;")
+print("   slope ~4 is CONSISTENT with that tilt. See scripts/cross_term_check.py for the direct measurement.]")
 devs, ws4 = [], [0.01, 0.02, 0.04, 0.08]
 for w in ws4:
     warr = np.full(NS - 2, w)
@@ -81,4 +83,4 @@ for w in ws4:
     devs.append(1 - cs)
     print(f"   w={w:4.2f}   1-cos_sim = {1 - cs:.3e}")
 slope4 = np.polyfit(np.log(ws4), np.log(devs), 1)[0]
-print(f"   log-log slope = {slope4:.3f}   (derivation predicts ~4)")
+print(f"   log-log slope = {slope4:.3f}   (quadratic in an O(w^2) tilt -> ~4; not a shape-invariance proof)")

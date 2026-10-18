@@ -35,20 +35,24 @@ Nature 586, 47 (2020). Full reference lists are in the papers.
    response is minus the leaked probability: d ln ρ = −w̃² |ψ₀|². Static calorimetry
    reads |g_tx|² and is blind to its sign.
 
-Both laws are **derived** and **verified** against independent numerics. Neither has
-been read by anyone outside the collaboration that produced them. The hardware is a
-paper design; the identification of the lattice shift term with g_tx is by dispersion
-form, not a completed static-to-stationary derivation. The papers state all of this.
+Both laws are **derived** and **verified** against independent numerics, and were
+re-derived by hand in an outside cold review (17 Oct 2026, `review/`). That review
+also found that paper 1's absolute-power figures (section 5) rest on a linewidth the
+draft never designs — the far-end lead cannot broaden the probed mode — so the device
+numbers are under revision; the laws and responsivities are unaffected. The
+identification of the lattice shift term with g_tx is by dispersion form, with the
+tilted-cone lattice literature now cited, not a completed static-to-stationary
+derivation. The papers state all of this.
 
 ## Status
 
 Drafts for comment. Not peer-reviewed, not submitted. Developed in extended
 collaboration between B. Watson (direction, framing, verification standard) and
 AI systems (Claude, Anthropic), which performed the bulk of the derivation, numerics,
-and drafting. Paper 2's Appendix B describes a two-session cross-verification
-protocol — independent implementations in different hopping conventions, with
-pre-registered expectations and errors kept on the record — that every result passed
-through.
+and drafting. Paper 2's Appendix B describes the two-session cross-checking process
+(reimplementation in a second hopping convention, errors kept on the record); the
+first independent reading is the cold review in `review/`, whose fix list is being
+worked through in the commit history.
 
 ## Layout
 
@@ -60,11 +64,14 @@ derivations/   imager-derivations.md           every proof in paper 1, step by s
                computed-ground-addendum.md     the counterpart session's independent reproduction
 scripts/       the verification set (see below)
 notes/         working notes: SUSY/memory bridge, memory protocol, archival skeleton
+review/        the 17 Oct 2026 cold review and its check script
 ```
 
 ## Scripts
 
-All numbers quoted in the papers trace to a script here. `ssh_common.py` holds the
+Every number in paper 1 section 4 and appendix A, and in paper 2 sections 2–6, traces to
+a script here. Not traced (no persisted script): paper 1's 10²⁷ clock comparison and
+the fabrication-scatter estimate of section 6. `ssh_common.py` holds the
 lattice builders (t₁t₂ = 1 convention); the `verify_return.py` / `law_check.py` /
 `derive_verify.py` set is the counterpart session's independent
 implementation (t₂ = 1 convention). Requires only numpy.
@@ -82,6 +89,7 @@ cd scripts && for s in *.py; do [ "$s" != ssh_common.py ] && python3 "$s"; done
 | tilt_cost.py, tilt_cost2.py | real vs imaginary NNN; S∘K pairing; mode reshaping |
 | bubble.py | warp-wall profile: pinning, blindness curve, evenness, preamplification, SNR |
 | derive_check.py | single-spike leak structure of the shift-law derivation |
+| cross_term_check.py | the A–A/B–B cross term: envelope tilt, boundary identity, warped-chain 5%, preamplification ∝ N^2σ |
 | reciprocal.py | counterpart's law verified across conventions; gauge-factor closure |
 | verify_return.py, law_check.py, derive_verify.py | counterpart session's set |
 | exploratory/kernel_law.py | counterpart diagnostics, no pass/fail criteria; provenance only |

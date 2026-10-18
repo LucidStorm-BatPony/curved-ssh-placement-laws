@@ -135,7 +135,7 @@ Iterate from the edge:
 If |t₁/t₂| < 1 the amplitude shrinks geometrically with n: the state is exponentially localized at the left edge, with localization length ξ set by ln|t₂/t₁|. This product IS the probability wave; |aₙ|² is where the particle sits. [VALIDATED — matches arXiv:2504.16200 Eqs. 19–20]
 
 ### 3.3 Existence bookkeeping (index theorem, used by the memory thread)
-Count equations vs unknowns: N_A unknowns (A-amplitudes), N_B constraint equations (one per B site). Guaranteed solutions on A: N_A − N_B. An odd chain (N_A = N_B + 1) therefore has EXACTLY one zero mode, pinned at E=0 regardless of any hopping values — this integer is the winding number and equals the Witten index of the SUSY formulation. [VALIDATED numerically: E₀ = 0 to machine precision, 100% sublattice weight]
+Count equations vs unknowns: N_A unknowns (A-amplitudes), N_B constraint equations (one per B site). Guaranteed solutions on A: N_A − N_B. An odd chain (N_A = N_B + 1) therefore has EXACTLY one zero mode, pinned at E=0 regardless of any hopping values — this integer is the Witten index of the SUSY formulation. (It is NOT the winding number: the winding number is a bulk invariant of the periodic/even chain that decides which end hosts the mode; the odd-chain index is 1 whether t₁ < t₂ or t₁ > t₂, the single mode just sitting at the other end. Corrected 17 Oct 2026.) [VALIDATED numerically: E₀ = 0 to machine precision, 100% sublattice weight]
 
 ---
 
@@ -145,6 +145,8 @@ Count equations vs unknowns: N_A unknowns (A-amplitudes), N_B constraint equatio
 The probe couples at the edge site; the LDOS there is the normalized probability at the edge (times lead broadening, which is σ-independent to leading order):
 
   ρ_edge(0) ∝ |a₁|² / Σₙ |aₙ|²  = 1 / Σₙ |aₙ/a₁|²
+
+*[correction, 17 Oct 2026]* The 'lead broadening factor' named above does not exist: the far-end lead cannot broaden a mode whose weight at the lead end is 10⁻¹⁵¹. The factor is 1/(πη) with η the numerical broadening — a stand-in for a physical linewidth that must be designed at the PROBED end (a line to the calorimeter), not inherited from the far end. The responsivities below are η-independent; §5's absolute power is not, and is superseded pending that design.
 
 *[why normalization matters]* This is the crucial structural fact: the edge reading depends on the amplitude at EVERY site, because the state must carry total probability 1. The footprint enters through the normalization sum.
 
@@ -175,7 +177,7 @@ where ⟨·⟩_footprint is the average weighted by the state's own probability 
 **N-scaling of the asymmetry (correction to earlier statements):** the quiet edge's responsivity falls as 1/N (per-bond plateau tilt ~1/2N times a fixed footprint), so the two-edge asymmetry GROWS LINEARLY with chain length: 60× (N=100), 151× (N=250), 304× (N=500). The old "~300× at N=250" figure was a rounding artifact (0.20/0.001 with the small number quoted to one digit; true values +0.203/−0.00134 → 151×). The asymmetry is a scaling law, not a single number.
 
 ### 4.4 Two corollaries that carry the paper
-**(a) Uniform is invisible — exactly.** If the metric change is uniform, f₁(k) = f₂(k) for all k (both bond species stretched identically), then Φ(n) = 0 for every n, and the sensitivity vanishes identically — not to first order, exactly, for the zero mode. *[This is the lattice equivalence principle: a uniform potential is unobservable; only its variation couples.]* Caveat for honesty: this exactness is a property of the chirally protected zero mode; finite-energy observables ARE scale-sensitive. A uniform rescaling that includes the probe coupling is also invisible for a different reason (the comoving-frame argument); one that excludes the probe coupling is visible (the Pound–Rebka configuration). State which configuration you mean.
+**(a) Uniform is invisible — exactly.** If the metric change is uniform, f₁(k) = f₂(k) for all k (both bond species stretched identically), then Φ(n) = 0 for every n, and the sensitivity vanishes identically — not to first order, exactly, for the zero mode. *[This is scale invariance: H → λH leaves every eigenvector unchanged, and the zero-energy reading cannot see λ. Earlier text called it an 'equivalence principle'; that oversold it.]* Caveat for honesty: this exactness is a property of the chirally protected zero mode; finite-energy observables ARE scale-sensitive. A uniform rescaling that includes the probe coupling is also invisible for a different reason (the comoving-frame argument); one that excludes the probe coupling is visible (the Pound–Rebka configuration). State which configuration you mean.
 
 **(b) Placement decides everything.** ⟨Φ⟩ is large only where the state's footprint w(n) overlaps the region where f varies steeply. For the power-law warping ((n/N)^σ varies steeply at small n, plateaus at large n): a left-edge state sits on the steep region (large ⟨Φ⟩); a right-edge state sits on the plateau (⟨Φ⟩ ≈ 0). Same chain, same curvature: responsivities differ by 151× at N=250 [−0.00134 vs +0.203 in d ln ρ/dσ at σ=0.5], growing linearly with N (60×/151×/304× at N=100/250/500). **The falsifiable headline prediction of the paper — an asymmetry AND its scaling law.**
 
